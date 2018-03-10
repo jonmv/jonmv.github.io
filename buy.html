@@ -105,6 +105,12 @@
                         {{ todo.text }}
                     </li>
                 </ol>
+                <button v-on:click='todos.push({ text: "And more ... "})'>Add task</button>
+            </div>
+
+            <div id="app5">
+                <p> {{ message }} </p>
+                <button v-on:click="reverseMessage">Reverse it</button>
             </div>
 
         </div>
@@ -134,15 +140,27 @@
                 }
             })
 
-            var app4 ´new Vue({
+            var app4 = new Vue({
                 el: '#app4',
                 data: {
                     todos: [
                     { text: "Learn JavaScript" },
                     { text: "Learn HTML" },
                     { text: "Learn CSS" },
-                    { text: "Learn Vue" },
+                    { text: "Learn Vue" }
                     ]
+                }
+            })
+
+            var app5 = new Vue({
+                el: '#app5',
+                data: {
+                    message: "Hellove Kristine :)"
+                },
+                methods: {
+                    reverseMessage: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    }
                 }
             })
 
