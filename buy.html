@@ -105,12 +105,21 @@
                         {{ todo.text }}
                     </li>
                 </ol>
-                <button v-on:click='todos.push({ text: "And more ... "})'>Add task</button>
+                <input v-model="todo">
+                <button v-on:click='todos.push({ text: todo})'>Add task</button>
             </div>
 
             <div id="app5">
                 <p> {{ message }} </p>
                 <button v-on:click="reverseMessage">Reverse it</button>
+            </div>
+
+            <div id="app6">
+                <ol>
+                    <todo-item v-for="item in groceryList"
+                               v-bind:todo="item"
+                               v-bind:key="item.id"/>
+                </ol>
             </div>
 
         </div>
@@ -148,7 +157,8 @@
                     { text: "Learn HTML" },
                     { text: "Learn CSS" },
                     { text: "Learn Vue" }
-                    ]
+                    ],
+                    todo: "Add new tasks here ..."
                 }
             })
 
@@ -160,10 +170,27 @@
                 methods: {
                     reverseMessage: function () {
                         this.message = this.message.split('').reverse().join('')
+                        app4.todos = app4.todos.reverse()
                     }
                 }
             })
 
+            Vue.component('todo-item', {
+                props: ['todo'],
+                template: '<li>{{ todo.text }}</li>'
+            })
+
+            var app6 = new Vue({
+                el: '#app6',
+                data: {
+                    groceryList: [
+                    { id: 0, text: "Vegetables" },
+                    { id: 2, text: "Whatever else humans should eat" },
+                    { id: 1, text: "Cheese" }
+                    ]
+                }
+            })
+                
         </script>
 
 	</body>
